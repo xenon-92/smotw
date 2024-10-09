@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - 'feature/**'
+      - 'main'
+  pull_request:
+    branches: [ $default-branch ]
 
 jobs:
   build:
