@@ -2,7 +2,8 @@ name: GO_TEST_BUILD
 
 on:
   push:
-    branches: [feature/**]
+    branches:
+      - 'feature/**'
 
 jobs:
   build:
@@ -16,6 +17,6 @@ jobs:
       with:
         go-version: '1.21'
     - name: Build
-      run: go build -v ../..
+      run: go build -v ./...
     - name: Echo out success
       run: echo 'Building Success'
