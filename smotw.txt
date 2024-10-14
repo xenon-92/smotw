@@ -1,0 +1,24 @@
+Original candidateList:
+Soham	Guruputra	Mozammil	Soumen	Sudip	Sabarna	Sumit	Kuldeep	Joe	Joey	Joel	John	Jonathan	Jacky	Jim	Jack	Jason
+
+Shuffled candidateList:
+Kuldeep	Jim	John	Joel	Sudip	Mozammil	Soumen	Jacky	Jason	Sabarna	Joe	Soham	Jonathan	Joey	Guruputra	Jack	Sumit
+
+Month			Name			WorkWeek
+October	Kuldeep	14-Oct-2024 to 18-Oct-2024
+October	Jim	21-Oct-2024 to 25-Oct-2024
+October	John	28-Oct-2024 to 01-Nov-2024
+November	Joel	04-Nov-2024 to 08-Nov-2024
+November	Sudip	11-Nov-2024 to 15-Nov-2024
+November	Mozammil	18-Nov-2024 to 22-Nov-2024
+November	Soumen	25-Nov-2024 to 29-Nov-2024
+December	Jacky	02-Dec-2024 to 06-Dec-2024
+December	Jason	09-Dec-2024 to 13-Dec-2024
+December	Sabarna	16-Dec-2024 to 20-Dec-2024
+December	Joe	23-Dec-2024 to 27-Dec-2024
+December	Soham	30-Dec-2024 to 03-Jan-2025
+January	Jonathan	06-Jan-2025 to 10-Jan-2025
+January	Joey	13-Jan-2025 to 17-Jan-2025
+January	Guruputra	20-Jan-2025 to 24-Jan-2025
+January	Jack	27-Jan-2025 to 31-Jan-2025
+February	Sumit	03-Feb-2025 to 07-Feb-2025
