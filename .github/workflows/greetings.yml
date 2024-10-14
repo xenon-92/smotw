@@ -14,3 +14,5 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         issue-message: "Good luck on solving the first issue"
         pr-message: "Good luck on merging the first PR"
+    - name: Echo message
+      run: echo "hello user!!"
