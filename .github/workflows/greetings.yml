@@ -1,6 +1,12 @@
 name: Greetings
 
-on: [pull_request_target, issues, feature/**]
+# on: [pull_request_target, issues, feature/**]
+on:
+  push:
+    branches:
+      - 'feature/**'
+  pull_request:
+    branches: [ $default-branch ]
 
 jobs:
   greeting:
