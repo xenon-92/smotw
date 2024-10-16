@@ -25,8 +25,9 @@ jobs:
           echo "${{ inputs.data }}" | base64 --decode > ./decoded_file.txt
       - name: Display Greetings
         run: |
-          echo "${{ inputs.name }}, ${{ inputs.name }}!"
-      - name: Display file content
+          echo "${{ inputs.name }}, ${{ inputs.greetingMsg }}!"
+      - name: Display the file content to intended user
         run: |
           cat ./decoded_file.txt
 # passing a base64 encoded message to an intended user
+# base64 "dummy" > base64.txt
