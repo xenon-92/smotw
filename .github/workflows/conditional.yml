@@ -15,10 +15,10 @@ jobs:
     steps:
       - name: Echo Basic Information
         run: |
-          "Ref: $GITHUB_REF" >> ./basic_info.txt
-          "Job Id: $GITHUB_JOB" >> ./basic_info.txt
-          "Action: $GITHUB_ACTION" >> ./basic_info.txt
-          "Actor: $GITHUB_ACTOR" >> ./basic_info.txt
+          echo "Ref: $GITHUB_REF" >> ./basic_info.txt
+          echo "Job Id: $GITHUB_JOB" >> ./basic_info.txt
+          echo "Action: $GITHUB_ACTION" >> ./basic_info.txt
+          echo "Actor: $GITHUB_ACTOR" >> ./basic_info.txt
           cat ./basic_info.txt
   Check2:
     if: ${{github.repository != 'octo-org/octo-repo-prod'}} # this will evaluate to true
@@ -26,10 +26,10 @@ jobs:
     steps:
       - name: Echo Basic Information
         run: |
-          "Ref: $GITHUB_REF" >> ./basic_info.txt
-          "Job Id: $GITHUB_JOB" >> ./basic_info.txt
-          "Action: $GITHUB_ACTION" >> ./basic_info.txt
-          "Actor: $GITHUB_ACTOR" >> ./basic_info.txt
+          echo "Ref: $GITHUB_REF" >> ./basic_info.txt
+          echo "Job Id: $GITHUB_JOB" >> ./basic_info.txt
+          echo "Action: $GITHUB_ACTION" >> ./basic_info.txt
+          echo "Actor: $GITHUB_ACTOR" >> ./basic_info.txt
           cat ./basic_info.txt
   Check3:
     if: ${{github.repository == 'xenon-92/smotw'}} # this will evaluate to true
