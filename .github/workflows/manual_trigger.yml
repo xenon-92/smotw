@@ -1,0 +1,32 @@
+name: Manual_trigger_workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        decription: Pass a secure message to a person
+        required: true
+        type: string
+      greetingMsg:
+        description: Type of Greeting
+        required: true
+        type: string
+      data:
+        description: Base64 encoded string
+        required: false
+        type: string
+
+jobs:
+  Secure_Message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Decode File contents
+        run: |
+          echo "${{ inputs.data }}" | base64 --decode > ./ decoded_file.txt
+      - name: Display Greetings
+        run: |
+          echo "${{ inputs.name }}, ${{ inputs.name }}!"
+      - name: Display file content
+        run: |
+          cat ./decoded_file.txt
+# passing a base64 encoded message to an intended user
