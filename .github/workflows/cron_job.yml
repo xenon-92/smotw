@@ -17,4 +17,4 @@ jobs:
         if: github.event.schedule == '0 0 * * *'
         run: echo 'cron job running once daily'
       - name: Every Time
-        run: echo 'This will run every time'
+        run: echo 'This will run every time at $(date)'
