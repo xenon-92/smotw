@@ -33,7 +33,7 @@ jobs:
           cat ./basic_info.txt
   Check3:
     if: ${{github.repository == 'xenon-92/smotw'}} # this will evaluate to true
-    runs-on: ubuntu-latest
+    runs-on: alpine-latest
     needs: [Check2] # this Job is dependent upon Job.<Job_ID> === Check2
     steps:
       - name: Echo Basic Information
