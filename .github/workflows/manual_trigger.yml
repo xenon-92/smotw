@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Decode File contents
         run: |
-          echo "${{ inputs.data }}" | base64 --decode > ./ decoded_file.txt
+          echo "${{ inputs.data }}" | base64 --decode > ./decoded_file.txt
       - name: Display Greetings
         run: |
           echo "${{ inputs.name }}, ${{ inputs.name }}!"
