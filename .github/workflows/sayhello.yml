@@ -52,4 +52,4 @@ jobs:
       - name: docker push image
         run: |
           echo 'pushing to docker hub'
-          docker push ${{secrets.DOCKER_USERNAME}}/${{ env.DOCKER_IMAGE_NAME }}: ${{ env.TAG }}
+          docker push ${{secrets.DOCKER_USERNAME}}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.TAG }}
