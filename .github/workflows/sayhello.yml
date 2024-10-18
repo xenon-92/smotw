@@ -1,4 +1,4 @@
-name: sayHello
+name: CI pipeline
 
 on:
   push:
@@ -16,3 +16,15 @@ jobs:
           echo "just saying hi"
           ls -la > ./rough
           cat ./rough
+  build:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: setup go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+      - name: build solution
+        run: go build -v ./...
