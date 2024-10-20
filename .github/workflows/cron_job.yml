@@ -18,4 +18,4 @@ jobs:
         run: echo 'cron job running once daily'
       - name: Every Time
         if: github.event.schedule == '*/1 * * * *'
-        run: echo 'This will run every time at $(date)'
+        run: echo "The current date is $(date)."
