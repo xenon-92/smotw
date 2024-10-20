@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '32 5 * * 1,3'
     - cron: '30 8 * * *'
-    - cron: '*/1 * * * *'
+    # - cron: '*/1 * * * *'
 
 jobs:
   testing_cron_schedule_template:
@@ -14,8 +14,8 @@ jobs:
         if: github.event.schedule != '32 5 * * 1,3'
         run: echo 'Skipping these on Monday and Wednesday'
       - name: Every 3 minutes
-        if: github.event.schedule == '0 0 * * *'
+        # if: github.event.schedule == '*/3 * * * *'
         run: echo 'cron job running once daily'
       - name: Every Time
-        if: github.event.schedule == '*/1 * * * *'
+        # if: github.event.schedule == '*/1 * * * *'
         run: echo "The current date is $(date)."
