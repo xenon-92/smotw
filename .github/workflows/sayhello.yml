@@ -69,4 +69,4 @@ jobs:
         run: |
           docker login --username axelrod92 --password ${{secrets.GHCR_PAT}} ghcr.io
           docker build -t ghcr.io/axelrod92/${{ env.GHCR_IMAGE_NAME }}:${{ env.TAG }} .
-          docker push -t ghcr.io/axelrod92/${{ env.GHCR_IMAGE_NAME }}:${{ env.TAG }}
+          docker push ghcr.io/axelrod92/${{ env.GHCR_IMAGE_NAME }}:${{ env.TAG }}
