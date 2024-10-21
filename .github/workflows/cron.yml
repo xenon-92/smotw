@@ -16,5 +16,6 @@ jobs:
       - name: Every 3 minutes
         if: github.event.schedule == '0 0 * * *'
         run: echo 'cron job running once daily'
-      - name: Every Time
+      - name: Every 2 minutes Time
+        if: github.event.schedule == '*/2 * * * *'
         run: echo 'This will run every time at $(date)'
