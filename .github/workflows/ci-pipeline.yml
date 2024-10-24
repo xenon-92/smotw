@@ -81,5 +81,17 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
-      - run: |
-          echo "Hello ji"
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 'latest'
+      - name: Generate SDK
+        run: dotnet tool install --global dotnet-swagger
+        id: generate_sdk
+      - name: Publish SDK
+        run: dotnet swagger to-dotnet --input ./openapi.yaml --output ./generated-sdk
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: sdk-package
+          path: ./generated-sdk
