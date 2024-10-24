@@ -93,7 +93,7 @@ jobs:
       - name: Publish to GitHub Packages
         run: |
           dotnet pack ./generated-sdk
-          nuget source add -name "github" "https://nuget.pkg.github.com/xenon-92/index.json"
+          dotnet nuget add source --username xenon-92 --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/xenon-92/index.json"
           dotnet nuget push ./generated-sdk/bin/Debug/*.nupkg --source "github"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
