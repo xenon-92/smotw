@@ -86,12 +86,13 @@ jobs:
         with:
           dotnet-version: '7.0.x'
       - name: Generate SDK
-        run: dotnet tool install --global dotnet-swagger
+        run: npm install @openapitools/openapi-generator-cli -g
         id: generate_sdk
       - name: Publish SDK
-        run: dotnet swagger to-dotnet --input ./openapi.yaml --output ./generated-sdk
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: sdk-package
-          path: ./generated-sdk
+        run: openapi-generator-cli generate -i ./openapi.yaml -g csharp -o ./generated-sdk
+      - name: Publish to GitHub Packages
+        run: |
+          dotnet pack ./generated-sdk
+          dotnet nuget push ./generated-sdk/bin/Debug/*.nupkg --source "github"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
