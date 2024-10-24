@@ -30,7 +30,7 @@ jobs:
           go-version: '1.21'
       - name: build solution
         run: go build -v ./...
-  docker_build_and_run:
+  docker_build_and_push:
     runs-on: 'ubuntu-latest'
     needs: build
     steps:
@@ -54,7 +54,7 @@ jobs:
         run: |
           echo 'pushing to docker hub'
           docker push ${{secrets.DOCKER_USERNAME}}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.TAG }}
-  GHCR_build_and_run:
+  GHCR_build_and_push:
     runs-on: 'ubuntu-latest'
     needs: build
     steps:
