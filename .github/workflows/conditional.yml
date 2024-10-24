@@ -3,8 +3,8 @@ name: Conditional_Events_Example
 on:
   push:
     branches:
-      - 'feature/**'
-      - 'main'
+      # - 'feature/**'
+      # - 'main'
   pull_request:
     branches: [ $default-branch ]
 
