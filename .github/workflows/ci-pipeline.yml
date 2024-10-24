@@ -62,7 +62,7 @@ jobs:
         uses: actions/checkout@v4
       - name: login to GHCR
         run: |
-          docker login --username axelrod92 --password ${{secrets.GHCR_PAT}} ghcr.io
+          docker login --username xenon-92 --password ${{secrets.GHCR_PAT}} ghcr.io
       - name: get docker tag
         id: time
         run: echo "TAG=$(date +'%y%m%d%H%M%S')" >> $GITHUB_ENV
@@ -70,8 +70,8 @@ jobs:
         run: echo 'docker image --> ${{ env.DOCKER_IMAGE_NAME }}'
       - name: build GHCR image
         run: |
-          docker build -t ghcr.io/axelrod92/${{ env.GHCR_IMAGE_NAME }}:${{ env.TAG }} .
-          docker push ghcr.io/axelrod92/${{ env.GHCR_IMAGE_NAME }}:${{ env.TAG }}
+          docker build -t ghcr.io/xenon-92/${{ env.GHCR_IMAGE_NAME }}:${{ env.TAG }} .
+          docker push ghcr.io/xenon-92/${{ env.GHCR_IMAGE_NAME }}:${{ env.TAG }}
       - name: push GHCR image
         run: |
-          docker push ghcr.io/axelrod92/${{ env.GHCR_IMAGE_NAME }}:${{ env.TAG }}
+          docker push ghcr.io/xenon-92/${{ env.GHCR_IMAGE_NAME }}:${{ env.TAG }}
