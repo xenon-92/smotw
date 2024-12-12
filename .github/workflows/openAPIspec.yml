@@ -34,8 +34,8 @@ jobs:
       - run: |
           ls -la
       - name: Build API docs
-        run : redocly build-docs ./docs/openapi.yaml -o ./docs/index.html
+        run : redocly build-docs docs/openapi.yaml -o docs/index.html
       - name: Publish to Github pages
         uses: actions/deploy-pages@v4
         with:
-          folder: ./docs
+          folder: docs
