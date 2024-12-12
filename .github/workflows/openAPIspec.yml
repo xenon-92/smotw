@@ -1,5 +1,6 @@
-name: Create and Publish Open API specs
+# taken from : https://dev.to/ashif8984/deploying-a-static-site-using-github-action-on-github-pages-5a9a
 
+name: Create and Publish Open API specs
 on:
   push:
     branches:
@@ -44,7 +45,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: './docs'
       - name: Publish to Github pages
         id: deployment
