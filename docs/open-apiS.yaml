@@ -1,0 +1,236 @@
+# https://swagger.io/docs/specification/v3_0/about/
+
+info:
+  title: FCC SEU ArtifactRegistry REST API
+  description: The FCC SEU ArtifactRegistry public REST API.
+  version: 0.0.1
+  contact:
+    email: GRP-FCC-CloudPackageCurators@hyland.com
+    name: Cloud Package Curator Team
+openapi: 3.0.0
+
+servers:
+- url: http://seuservice-artifactregistry.internal.{environment}.experience.hyland.com
+  variables:
+    environment:
+      default: sandbox
+      description: The NCP environment the API is deployed to.
+      enum:
+      - sandbox
+      - dev
+      - staging
+      - prod
+tags:
+  - name: artifact-metadata
+    description: The metadata of an artifact
+
+paths:
+  /artifact:
+    post:
+      tags:
+        - artifact-metadata
+      summary: Adds a new artifact metadata.
+      description: Add an artifact metadata to the artifact repository.
+      operationId: addArtifact
+      requestBody:
+        description: Create a new metadata in the Artifact registry
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/artifactMetadata'
+      responses:
+        200:
+          description: Successful operation. <br> The response code indicates that the request has
+                        succeeded and new artifact metadata has been stored.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OKResponseWData'
+        400:
+          description: >
+                      Bad Request <br>
+                      The response status code indicates that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax etc)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: >
+                      Unauthorized. <br>
+                      This code indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        403:
+          description: >
+                      Forbidden. <br>
+                      This code indicates that the server understands the request but refuses to authorize it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: >
+                      Not Found. <br>
+                      The error response code indicates that the server can’t find the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        415:
+          description: >
+                      Unsupported Media Type. <br>
+                      The server refuses to accept the request because the payload format is in an unsupported format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500:
+          description: >
+                      Internal server error occured. <br>
+                      The server error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        503:
+          description: >
+                      Service Unavailable. <br>
+                      This server error response code indicates that the server is not ready to handle the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /:
+    get:
+      summary: The root resource.
+      responses:
+        "200":
+          description: The root resource.
+components:
+  schemas:
+    artifactMetadata:
+      type: object
+      properties:
+        package_id:
+          type: string
+          example: appserver
+          description: Unique identifier for the NuGet package 
+        version:
+          type: string
+          pattern: ^\d+\.\d+\.\d+$
+          description: product version in the format major.minor.patch
+          example: 25.10.101 
+        description:
+          type: string
+          example: Onabase Appserver
+        owner:
+          type: string
+          description: Owner of the metadata
+          example: OnBase
+          enum:
+            - Perseptive
+            - Alfresco
+            - Nuxeo
+            - OnBase
+        package_name:
+          type: string
+          example: Appserver.25.10.101.nupkg
+        published_date:
+          type: string
+          example: 2023-05-12T14:30:00Z
+          format: date-time
+        tag:
+          type: string
+          example: stable
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dependencies'
+        target_frameworks:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetFrameworks'
+        package_size:
+          description: the byte size of the nuget package
+          example: 1024
+        package_integrity:
+          description: the package integrity
+          example: MD5
+          enum:
+            - MD5
+            - SHA256
+        package_status:
+          type: string
+          description: Status of the package
+          example: Active
+          enum:
+            - Active
+            - Deprecated
+            - Stale
+            - EOL
+    TargetFrameworks:
+      type: object
+      description: Dotnet target framework
+      properties:
+        target:
+          type: string
+          example: net6.0
+    Dependencies:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Newtonsoft.Json
+        version:
+          type: string
+          example: 12.1.11
+    OKResponseWData:
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OKResponse'
+          
+    OKResponse:
+      type: object
+      properties:
+        result:
+          type: string
+          nullable: true
+    
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: '#/components/schemas/ErrorObject'
+    ErrorObject:
+      required:
+        - code
+        - detail
+        - status
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code applicable to this problem
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem
+        code:
+          type: integer
+          description: An application-specific error code
+        link:
+          type: string
+          description: A link to a document containing more information about the error
+          
+        
+  
