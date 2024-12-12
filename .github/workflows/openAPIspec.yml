@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: './docs/index.html'
+          path: './docs'
       - name: Publish to Github pages
         id: deployment
         uses: actions/deploy-pages@v4
