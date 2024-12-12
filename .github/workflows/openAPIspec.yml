@@ -32,9 +32,9 @@ jobs:
       # - name: Run Lint test
       #   run: redocly lint ./docs/open-api.yaml --format=github-actions
       - run: |
-          ls -la
+          ls ./docs
       - name: Build API docs
-        run : redocly build-docs docs/openapi.yaml -o docs/index.html
+        run : redocly build-docs ./docs/openapi.yaml -o ./docs/index.html
       - name: Publish to Github pages
         uses: actions/deploy-pages@v4
         with:
