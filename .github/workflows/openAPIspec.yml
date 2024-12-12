@@ -1,0 +1,39 @@
+name: Create and Publish Open API specs
+
+on:
+  push:
+    branches:
+      - 'SpecFeature/**'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  sayHello:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+      - name: bash to compute
+        run: |
+          echo "just saying hi"
+          ls -la > ./rough
+          cat ./rough
+  build:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+      - name: Install Redocly CLI
+        run: npm install -g @redocly/cli@latest
+      - name: Run Lint test
+        run: redocly lint ./docs/open-api.yaml --format=github-actions
+      - name: Build API docs
+        run : redocly build-docs ./docs/openapi.yaml -o ./docs/index.html
+      - name: Publish to Github pages
+        uses: actions/deploy-pages@v4
+        with:
+          folder: ./docs
