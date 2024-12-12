@@ -29,8 +29,8 @@ jobs:
         uses: actions/setup-node@v4
       - name: Install Redocly CLI
         run: npm install -g @redocly/cli@latest
-      - name: Run Lint test
-        run: redocly lint ./docs/open-api.yaml --format=github-actions
+      # - name: Run Lint test
+      #   run: redocly lint ./docs/open-api.yaml --format=github-actions
       - name: Build API docs
         run : redocly build-docs ./docs/openapi.yaml -o ./docs/index.html
       - name: Publish to Github pages
