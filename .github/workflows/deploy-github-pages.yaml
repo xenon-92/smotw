@@ -24,7 +24,7 @@ jobs:
       - name: Install Redocly CLI
         run: npm install -g @redocly/cli@latest
       - name: Build API docs
-        run : redocly build-docs ./docs/open-api.yaml -o ./docs/open-api.html
+        run : redocly build-docs ./docs/open-api.yaml -o ./docs/index.html
       - name: Setup pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
