@@ -1,11 +1,8 @@
-# taken from : https://dev.to/ashif8984/deploying-a-static-site-using-github-action-on-github-pages-5a9a
-
 name: Create and Publish Open API specs
 on:
   push:
     branches:
-      - 'SpecFeatureX/**'
-      - 'mainX'
+      - 'SpecFeature/**'
 
 permissions:
   contents: read
@@ -13,16 +10,7 @@ permissions:
   id-token: write
 
 jobs:
-  sayHello:
-    runs-on: 'ubuntu-latest'
-
-    steps:
-      - name: bash to compute
-        run: |
-          echo "just saying hi"
-          ls -la > ./rough
-          cat ./rough
-  build:
+  publish_github_pages:
     runs-on: 'ubuntu-latest'
     environment:
       name: github-pages
@@ -34,13 +22,8 @@ jobs:
         uses: actions/setup-node@v4
       - name: Install Redocly CLI
         run: npm install -g @redocly/cli@latest
-      # - name: Run Lint test
-      #
-      #   run: redocly lint ./docs/open-api.yaml --format=github-actions
-      - run: |
-          ls ./docs
       - name: Build API docs
-        run : redocly build-docs ./docs/open-api.yaml -o ./docs/index.html
+        run : redocly build-docs ./docs/open-api.yaml -o ./docs/open-api.html
       - name: Setup pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
