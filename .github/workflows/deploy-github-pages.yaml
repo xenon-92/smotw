@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'SpecFeature/**'
+      - 'main'
 
 permissions:
   contents: read
