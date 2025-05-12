@@ -41,5 +41,6 @@ jobs:
           dotnet-version: '9.0.x'
       - name: run scripts
         run: |-
+          chmod +x ./scripts/populate-data.sh
           ./scripts/populate-data.sh
         id: generate_sdk
