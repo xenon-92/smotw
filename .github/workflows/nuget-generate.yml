@@ -82,11 +82,13 @@ jobs:
     steps:
       - name: use package path
         run: echo "Package is at ${{ needs.Generate_Nuget_Package_using_inline_script.outputs.package_path }}"
+      - name: checkout repo
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: download artifact
         uses: actions/download-artifact@v4
         with:
           name: nuget-package
       - name: display artifact
         run: |
-          ls ./generated-sdk
+          ls 
     
