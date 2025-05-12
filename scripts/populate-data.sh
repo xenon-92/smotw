@@ -7,11 +7,10 @@ set -e
 CLASS_LIB_NAME="Hyland.AcceptanceTests"
 CLASS_LIB_EXTENSION=".csproj"
 PROJECT_NAME="${CLASS_LIB_NAME}${CLASS_LIB_EXTENSION}"
-VERSION="1.0.0"
+VERSION="11.0.0"
 AUTHOR="HYLAND SOFTWARE"
 DESCRIPTION="A dynamically created NuGet package"
 COMPANY="HYLAND"
-OUTPUT_DIR="./nupkgs"
 
 mkdir -p ./generated-sdk
 
@@ -31,5 +30,16 @@ fi
 
 echo "🔍 Checking for existing NuGet metadata..."
 
-dotnet pack
-ls ./bin/Release/
+if grep -q "<PackageId>" "$PROJECT_NAME"; then
+  echo "ℹ️ Package metadata already exists in $PROJECT_NAME."
+else
+  echo "✍️ Inserting NuGet metadata..."
+  sed -i "/<PropertyGroup>/a \
+  <PackageId>${CLASS_LIB_NAME}</PackageId>\n  <Version>${VERSION}</Version>\n  <Authors>${AUTHOR}</Authors>\n  <Company>${COMPANY}</Company>" "$PROJECT_NAME"
+  echo "✅ Metadata inserted into $PROJECT_NAME."
+fi
+
+dotnet pack "$PROJECT_NAME" -c Release -v:normal -o ./
+ls
+# dotnet pack
+# ls ./bin/Release/
