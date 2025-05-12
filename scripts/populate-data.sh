@@ -43,6 +43,4 @@ dotnet pack "$PROJECT_NAME" -c Release -v:normal -o ./
 ls
 cd ..
 file=$(find ./generated-sdk -name "*.nupkg" | head -n 1)
-    echo "package_path=$file" >> $GITHUB_ENV
-# dotnet pack
-# ls ./bin/Release/
+    echo "package_path=$file" >> "$GITHUB_OUTPUT"

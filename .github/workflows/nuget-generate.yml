@@ -29,6 +29,8 @@ jobs:
           ls ./bin/Release
   Generate_Nuget_Package_using_script:
     runs-on: 'ubuntu-latest'
+    outputs:
+      package_path: ${{ steps.generate_sdk.outputs.package_path }}
     steps:
       - name: checkout repo
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -46,5 +48,5 @@ jobs:
     needs: Generate_Nuget_Package_using_script
     steps:
       - name: use package path
-        run: echo "Package is at ${{ steps.generate_sdk.outputs.package_path }}"
+        run: echo "Package is at ${{ needs.Generate_Nuget_Package_using_script.outputs.package_path }}"
     
