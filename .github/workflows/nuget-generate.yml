@@ -1,0 +1,32 @@
+name: CI pipeline
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+      - 'main'
+env:
+  DOCKER_IMAGE_NAME: 'smotw_go_demo'
+  GHCR_IMAGE_NAME: 'smotw'
+
+jobs:
+  Generate_Nuget_Package:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Set up .NET
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9
+        with:
+          dotnet-version: '9.0.x'
+      - name: Create test dir
+        run: |-
+          mkdir -p ./generated-sdk
+        id: generate_sdk
+      - name: Generate SDK
+        run: |-
+          echo 'Generating SDK ....'
+          dotnet new classlib -n SmotwSdk --output ./generated-sdk
+          cd ./generated-sdk
+          dotnet pack
+          ls ./bin/Release
