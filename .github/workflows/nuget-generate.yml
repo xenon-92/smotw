@@ -90,5 +90,5 @@ jobs:
           name: nuget-package
       - name: display artifact
         run: |
-          ls 
+          ls /
     
