@@ -88,7 +88,5 @@ jobs:
           name: nuget-package
       - name: display artifact
         run: |
-          echo "Artifact is at ${{ needs.Generate_Nuget_Package_using_inline_script.outputs.package_path }}"
-          ls -la ${{ needs.Generate_Nuget_Package_using_inline_script.outputs.package_path }}
-          cat ${{ needs.Generate_Nuget_Package_using_inline_script.outputs.package_path }}
+          ls ./generated-sdk
     
