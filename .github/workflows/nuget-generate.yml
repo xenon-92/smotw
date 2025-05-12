@@ -30,3 +30,16 @@ jobs:
           cd ./generated-sdk
           dotnet pack
           ls ./bin/Release
+  Generate_Nuget_Package_using_script:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Set up .NET
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9
+        with:
+          dotnet-version: '9.0.x'
+      - name: run scripts
+        run: |-
+          ./scripts/populate-data.sh
+        id: generate_sdk
