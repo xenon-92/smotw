@@ -71,10 +71,24 @@ jobs:
           chmod +x ./scripts/populate-data.sh
           ./scripts/populate-data.sh
         id: generate_sdk_inline
+      - name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: nuget-package
+          path: ${{ needs.Generate_Nuget_Package_using_inline_script.outputs.package_path }}
   Display_from_gh_var:
     runs-on: 'ubuntu-latest'
     needs: Generate_Nuget_Package_using_inline_script
     steps:
       - name: use package path
         run: echo "Package is at ${{ needs.Generate_Nuget_Package_using_inline_script.outputs.package_path }}"
+      - name: download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: nuget-package
+      - name: display artifact
+        run: |
+          echo "Artifact is at ${{ needs.Generate_Nuget_Package_using_inline_script.outputs.package_path }}"
+          ls -la ${{ needs.Generate_Nuget_Package_using_inline_script.outputs.package_path }}
+          cat ${{ needs.Generate_Nuget_Package_using_inline_script.outputs.package_path }}
     
