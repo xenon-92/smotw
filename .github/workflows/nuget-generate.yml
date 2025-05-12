@@ -46,5 +46,5 @@ jobs:
     needs: Generate_Nuget_Package_using_script
     steps:
       - name: use package path
-        run: echo "Package is at ${{ needs.Generate_Nuget_Package_using_script.outputs.package_path }}"
+        run: echo "Package is at ${{ steps.generate_sdk.outputs.package_path }}"
     
