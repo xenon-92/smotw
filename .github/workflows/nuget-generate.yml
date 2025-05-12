@@ -72,7 +72,7 @@ jobs:
           ./scripts/populate-data.sh
         id: generate_sdk_inline
       - name: upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nuget-package
           path: ${{ needs.Generate_Nuget_Package_using_inline_script.outputs.package_path }}
@@ -83,7 +83,7 @@ jobs:
       - name: use package path
         run: echo "Package is at ${{ needs.Generate_Nuget_Package_using_inline_script.outputs.package_path }}"
       - name: download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: nuget-package
       - name: display artifact
