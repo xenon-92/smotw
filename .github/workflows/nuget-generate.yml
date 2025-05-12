@@ -47,6 +47,29 @@ jobs:
           chmod +x ./scripts/populate-data.sh
           ./scripts/populate-data.sh
         id: generate_sdk
+  Generate_Nuget_Package_using_inline_script:
+    runs-on: 'ubuntu-latest'
+    outputs:
+      package_path: ${{ steps.generate_sdk.outputs.package_path }}
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          sparce-checkout: |
+            /scripts
+      - name: Install Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.x # invisible to dependabot
+      - name: Set up .NET
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9
+        with:
+          dotnet-version: '9.0.x'
+      - name: run scripts
+        run: |-
+          chmod +x ./scripts/populate-data.sh
+          ./scripts/populate-data.sh
+        id: generate_sdk_inline
   Display_from_gh_var:
     runs-on: 'ubuntu-latest'
     needs: Generate_Nuget_Package_using_script
