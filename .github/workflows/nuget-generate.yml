@@ -50,7 +50,7 @@ jobs:
   Generate_Nuget_Package_using_inline_script:
     runs-on: 'ubuntu-latest'
     outputs:
-      package_path: ${{ steps.generate_sdk.outputs.package_path }}
+      package_path: ${{ steps.generate_sdk_inline.outputs.package_path }}
     steps:
       - name: checkout repo
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
